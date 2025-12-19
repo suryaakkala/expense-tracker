@@ -1,14 +1,75 @@
-ENV FILE:
+# Expense Sharing Application (Backend)
+
+A backend expense-sharing system inspired by Splitwise. This application allows users to create groups, add shared expenses, split costs in multiple ways, and track balances between users.
+
+---
+
+## Features
+- User creation
+- Group creation with multiple members
+- Add expenses to groups
+- Split expenses using:
+  - Equal split
+  - Exact amounts
+  - Percentage-based split
+- Automatic balance calculation
+- View who owes whom
+
+---
+
+## Tech Stack
+- **Node.js**
+- **Express.js**
+- **MySQL**
+- **mysql2** (database driver)
+- **dotenv** (environment variables)
+
+---
+
+## Project Structure
+```
+suryaakkala-expense-tracker/
+│── app.js
+│── package.json
+│── README.md
+│── src/
+│   ├── config/
+│   │   └── db.js
+│   ├── controllers/
+│   │   ├── userController.js
+│   │   ├── groupController.js
+│   │   ├── expenseController.js
+│   │   └── balanceController.js
+│   ├── routes/
+│   │   ├── users.js
+│   │   ├── groups.js
+│   │   ├── expenses.js
+│   │   └── balances.js
+│   ├── services/
+│   │   └── balanceService.js
+│   └── utils/
+│       └── splitUtils.js
+```
+
+---
+
+## Environment Variables
+Create a `.env` file in the root directory:
+
 ```
 PORT=3000
 DB_HOST=localhost
 DB_USER=root
-DB_PASSWORD=pwd
+DB_PASSWORD=password
 DB_NAME=expense_app_db
 ```
 
-MySQL DB SCHEMA:
-```
+---
+
+## Database Setup
+Create the database and tables using the following schema:
+
+```sql
 CREATE DATABASE expense_app_db;
 USE expense_app_db;
 
@@ -54,3 +115,66 @@ CREATE TABLE balances (
 );
 ```
 
+---
+
+## Installation & Running
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the server:
+   ```bash
+   npm start
+   ```
+
+Server will run on:
+```
+http://localhost:3000
+```
+
+---
+
+## API Endpoints
+
+### Users
+- `POST /users` → Create a new user
+
+### Groups
+- `POST /groups` → Create a new group
+
+### Expenses
+- `POST /expenses` → Add an expense to a group
+
+### Balances
+- `GET /balances/:userId` → Get balance details for a user
+
+---
+
+## Expense Split Types
+- **EQUAL** – Amount divided equally among participants
+- **EXACT** – Fixed amount per user
+- **PERCENT** – Percentage-based split
+
+---
+
+## Example Flow
+1. Create users
+2. Create a group and add members
+3. Add expenses with split type
+4. View balances to see who owes whom
+
+---
+
+## Future Improvements
+- Authentication and authorization
+- Expense settlement feature
+- Transaction history
+- Input validation and error handling
+- Frontend integration
+
+---
+
+## License
+This project is for educational and learning purposes.
